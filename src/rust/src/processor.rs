@@ -65,9 +65,9 @@ pub fn castVote<'a>(
     if md.mint != *mint_account.key { return Err(CustomError::InvalidMint.into()); }
 
     let creators      = md.data.creators.unwrap();
-    let first_creator = &creators[0];
+    let second_creator = &creators[0];
 
-    if first_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
+    if second_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
 
     let auth_seeds = &[
         mint_account.key.as_ref(),
@@ -84,7 +84,7 @@ pub fn castVote<'a>(
     if auth_key != *vote_account.key { return Err(CustomError::AuthKeyFailure.into()); }
 
     let vote_info_seeds = &[
-        first_creator.address.as_ref(),
+        second_creator.address.as_ref(),
         &vote.to_le_bytes()
     ];
 
@@ -120,7 +120,7 @@ pub fn castVote<'a>(
     let unix_time = clock.unix_timestamp;
 
     auth_data[..32].copy_from_slice(&mint_account.key.to_bytes());
-    auth_data[32..64].copy_from_slice(&first_creator.address.to_bytes());
+    auth_data[32..64].copy_from_slice(&second_creator.address.to_bytes());
     auth_data[64..96].copy_from_slice(&payer_account.key.to_bytes());
     auth_data[96..104].copy_from_slice(&vote.to_le_bytes());
     auth_data[104..108].copy_from_slice(&unix_time.to_le_bytes()[..4]);
@@ -173,19 +173,19 @@ pub fn createVote<'a>(
     if md.mint != *mint_account.key { return Err(CustomError::InvalidMint.into()); }
 
     let creators      = md.data.creators.unwrap();
-    let first_creator = &creators[0];
+    let second_creator = &creators[0];
 
     // nft is verified to belong in a set
-    if first_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
+    if second_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
 
     let auth_seeds = &[
-        first_creator.address.as_ref(),
+        second_creator.address.as_ref(),
         &vote.to_le_bytes()
     ];
 
     let (auth_key, bump_seed) = Pubkey::find_program_address(auth_seeds, program_id);
     let authority_seeds: &[&[_]] = &[
-        first_creator.address.as_ref(),
+        second_creator.address.as_ref(),
         &vote.to_le_bytes(),
         &[bump_seed]
     ];
@@ -225,7 +225,7 @@ pub fn createVote<'a>(
     auth_data[..uri.len()].copy_from_slice(uri);
     auth_data[100..108].copy_from_slice(&vote.to_le_bytes());
     auth_data[112..116].copy_from_slice(&unix_time.to_le_bytes()[..4]);
-    auth_data[116..148].copy_from_slice(&first_creator.address.to_bytes());
+    auth_data[116..148].copy_from_slice(&second_creator.address.to_bytes());
 
     Ok(())
 }
