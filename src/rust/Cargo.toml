@@ -1,5 +1,5 @@
 [package]
-name = "pp-voter"
+name = "ppvoter"
 version = "0.0.1"
 description = ""
 authors = ["vlawmz <@flawmz>", "NFP <@nonfungible_dev>"]
@@ -27,6 +27,6 @@ solana-program-test = "=1.8.14"
 solana-sdk = "=1.8.14"
 
 [lib]
-name = "pp-voter"
+name = "ppvoter"
 crate-type = ["cdylib"]
 path = "src/entrypoint.rs"

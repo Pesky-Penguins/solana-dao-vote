@@ -522,23 +522,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dao-voter"
-version = "0.0.1"
-dependencies = [
- "borsh",
- "borsh-derive",
- "md5",
- "metaplex-token-metadata",
- "num-derive",
- "num-traits",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
- "spl-token",
- "thiserror",
-]
-
-[[package]]
 name = "dashmap"
 version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1616,6 +1599,23 @@ name = "ppv-lite86"
 version = "0.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ac74c624d6b2d21f425f752262f42188365d7b8ff1aff74c82e45136510a4857"
+
+[[package]]
+name = "ppvoter"
+version = "0.0.1"
+dependencies = [
+ "borsh",
+ "borsh-derive",
+ "md5",
+ "metaplex-token-metadata",
+ "num-derive",
+ "num-traits",
+ "solana-program",
+ "solana-program-test",
+ "solana-sdk",
+ "spl-token",
+ "thiserror",
+]
 
 [[package]]
 name = "proc-macro-crate"
