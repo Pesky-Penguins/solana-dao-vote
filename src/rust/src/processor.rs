@@ -65,7 +65,7 @@ pub fn castVote<'a>(
     if md.mint != *mint_account.key { return Err(CustomError::InvalidMint.into()); }
 
     let creators      = md.data.creators.unwrap();
-    let second_creator = &creators[0];
+    let second_creator = &creators[1];
 
     if second_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
 
@@ -173,7 +173,7 @@ pub fn createVote<'a>(
     if md.mint != *mint_account.key { return Err(CustomError::InvalidMint.into()); }
 
     let creators      = md.data.creators.unwrap();
-    let second_creator = &creators[0];
+    let second_creator = &creators[1];
 
     // nft is verified to belong in a set
     if second_creator.verified == false { return Err(CustomError::AuthKeyFailure.into()); }
